@@ -45,3 +45,7 @@ vim.opt.termguicolors = true
 -- Scroll limits
 vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 8
+
+-- Command line height
+vim.opt.cmdheight = 1
+vim.opt.laststatus = 0
