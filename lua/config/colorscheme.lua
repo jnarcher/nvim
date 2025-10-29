@@ -1,6 +1,6 @@
 -- colorscheme
 
-function Colorize(color)
+function set_colorscheme(color)
   color = color or 'catppuccin-mocha'
   vim.cmd.colorscheme(color)
   vim.api.nvim_set_hl(0, 'CurosrLine', { bg = 'none' })
@@ -8,5 +8,5 @@ function Colorize(color)
   vim.api.nvim_set_hl(0, 'CursorLineNR', { bold = true, italic = true})
 end
 
-Colorize()
+set_colorscheme()
 
