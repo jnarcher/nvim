@@ -1,7 +1,3 @@
--- lsp
-
-vim.lsp.enable('lua_ls')
-
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -21,19 +17,5 @@ vim.diagnostic.config({
   }
 })
 
-vim.lsp.config('luals', {
-  cmd = { 'lua-language-server' },
-  filetypes = { 'lua' },
-  root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-      },
-    },
-  },
-})
-
-vim.lsp.config('lua_ls', {
-  filetypes = { '.lua' },
-})
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('pyright')

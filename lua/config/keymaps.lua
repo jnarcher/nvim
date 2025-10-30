@@ -1,9 +1,7 @@
--- keymaps.lua
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-function map(modes, keymap, action, description)
+local function map(modes, keymap, action, description)
   vim.keymap.set(modes, keymap, action, { desc = description })
 end
 

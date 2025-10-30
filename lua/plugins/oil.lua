@@ -1,5 +1,3 @@
--- oil.lua
-
 local ignored_filetypes = {
   '.DS_Store',
   '.swp',

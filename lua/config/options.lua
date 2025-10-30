@@ -1,5 +1,3 @@
--- options
-
 -- Line Number & Cursor Line Highlight
 vim.opt.number = true
 vim.opt.cursorline = true
@@ -34,7 +32,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Save Undo History
-vim.opt.undofile = ture
+vim.opt.undofile = true
 
 -- Set Default Floating Window Border
 vim.opt.winborder = 'rounded'
@@ -49,3 +47,5 @@ vim.opt.sidescrolloff = 8
 -- Command line height
 vim.opt.cmdheight = 1
 vim.opt.laststatus = 0
+
+vim.opt.winbar = '%{expand("%:~:.")}%m%='
