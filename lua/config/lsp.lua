@@ -1,5 +1,4 @@
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
+local function lsp_callback(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
@@ -11,10 +10,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set('n', 'gR', ':Telescope lsp_references<CR>', opts)
 
       opts.desc = 'Go to declaration'
-      vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, opts)
+      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
 
-      opts.desc = 'Show LSP definition'
-      vim.keymap.set('n', 'gD', vim.lsp.buf.definition, opts)
+      opts.desc = 'Go to LSP definition'
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 
       opts.desc = 'Show LSP implementation'
       vim.keymap.set('n', 'gi', ':Telescope lsp_implementations<CR>', opts)
@@ -42,10 +41,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
       opts.desc = 'Restart LSP'
       vim.keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts)
-
     end
-  end
-})
+end
+
+vim.api.nvim_create_autocmd('LspAttach', { callback = lsp_callback })
 
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('pyright')
