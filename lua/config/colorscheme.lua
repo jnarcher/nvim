@@ -7,4 +7,3 @@ function SetColorscheme(color)
 end
 
 SetColorscheme()
-

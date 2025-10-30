@@ -4,17 +4,47 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-      vim.keymap.set('i', '<C-Space>', function()
-        vim.lsp.completion.get()
-      end)
+
+      local opts = { buffer = ev.buf, silent = true }
+
+      opts.desc = 'Show LSP references'
+      vim.keymap.set('n', 'gR', ':Telescope lsp_references<CR>', opts)
+
+      opts.desc = 'Go to declaration'
+      vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, opts)
+
+      opts.desc = 'Show LSP definition'
+      vim.keymap.set('n', 'gD', vim.lsp.buf.definition, opts)
+
+      opts.desc = 'Show LSP implementation'
+      vim.keymap.set('n', 'gi', ':Telescope lsp_implementations<CR>', opts)
+
+      opts.desc = 'Show LSP type definitions'
+      vim.keymap.set('n', 'gt', ':Telescope lsp_type_definitions<CR>', opts)
+
+      opts.desc = 'See available code actions'
+      vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+
+      opts.desc = 'Smart rename'
+      vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+
+      opts.desc = 'Show buffer diagnostics'
+      vim.keymap.set('n', '<leader>D', ':Telescope diagnostics<CR>', opts)
+
+      opts.desc = 'Show line diagnostics'
+      vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts)
+
+      opts.desc = 'Show documentation for what is under cursor'
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+
+      opts.desc = 'Get LSP completions'
+      vim.keymap.set('i', '<C-Space>', vim.lsp.completion.get, opts)
+
+      opts.desc = 'Restart LSP'
+      vim.keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts)
+
     end
   end
-})
-
-vim.diagnostic.config({
-  virtual_lines = {
-    current_line = true,
-  }
 })
 
 vim.lsp.enable('lua_ls')
